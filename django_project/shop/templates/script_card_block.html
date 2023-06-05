@@ -1,0 +1,60 @@
+{% block scripts %}
+
+  <script>
+    $(document).ready(function() {
+      let display = false
+      let add_url = 'addcard/'
+      $('.add-card-form').submit(function(e) {
+        e.preventDefault()
+
+        const post_id = $(this).attr('id')
+        const url = $(this).attr('action')
+
+        const count = $(`.left-items${post_id}`).text()
+        
+        $.ajax({
+          type: 'POST',
+          url: url,
+          data: {
+            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
+            'post_id': post_id
+          },
+          success: function(response) {
+            $(`.left-items${post_id}`).text(count - 1)
+          },
+          error: function(response) {
+            console.log('error', response)
+          }
+        })
+      })
+
+      $('.del-card-form').submit(function(e) {
+        e.preventDefault()
+        
+        const post_id = $(this).attr('id')
+        const url = $(this).attr('action')
+
+        const count = $(`.count-ordered-card{{product.id}}${post_id}`).text()
+        const li = $(`card-list${post_id}`).text()
+        $.ajax({
+          type: 'POST',
+          url: url,
+          data: {
+            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
+            'post_id': post_id
+          },
+          success: function(response) {
+            const elements = $(`.card-list${post_id}`)
+            while(elements.length > 0){
+              elements[0].parentNode.removeChild(elements[0]);
+            }
+          },
+          error: function(response) {
+            console.log('error', response)
+          }
+        })
+      })
+    })
+  </script>
+
+{% endblock scripts %}

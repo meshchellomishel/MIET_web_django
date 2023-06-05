@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+  <content>
+    <div class="profile-info">
+      <div class="about-user">
+        <h5> ABOUT {{ user.get_username }} </h5>
+        <p>We support the continuous progress of athletes and sports by taking measures to help athletes reach their potential. At the heart of every job at NIKE, Inc. is a team approach, cultivating a culture of innovation and a common goal - to make a lasting impact.</p>
+      </div>
+      <a> <img class="avatar" src="{% static '/shop/img/avatar.jpeg' %}"> </a>
+      <a class="nav-button" href="{% url 'logout' %}"> Выйти </a>
+    </div>
+    <h1 id="separator">
+      <a class="back-button" href="/"><</a>
+      <a>Ассортимент магазина</a>
+    </h1>
+    <div class="items" id="container">
+      <a href = "/post/post.html">
+        <img class="element" src="/mediafiles/images/nike-air-max-97-yellow-tie-dye-FN0321-100-4.webp">
+      </a>
+      <a>
+        <img class="element" src=/mediafiles/images/nike-dunk-high-50-years-of-hip-hop-DV7216-001.webp>
+      </a>
+    </div>
+  </content>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load index %}
+{% block content %}
+
+{% for product in items %}
+  <li class="card-list{{product.id}}"> 
+    <h2> {{ product.title }} {{ product.cost }} </h2>
+      <a href="{{ product.get_absolute_url }}">
+        <img class="promote-img" src="{{ product.image.url }}" alt="{{ product.title }}">
+       </a>
+      <p class="count-ordered-card{{product.id}}"> count: {{counts|index:product}} </p>
+      <form method="POST", class="del-card-form" action="{% url 'del_from_card' product.id %}" id="{{product.id}}">
+      {% csrf_token %}
+        <input type="hidden" value="{{product.id}}">
+          <button class="card-btn{{product.id}}" type="submit"> Удалить все </button>
+      </form>
+  </li>
+{% endfor %}
+{% endblock content %}

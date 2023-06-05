@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+      <h1 class="heading">
+        Найди свой любимый бренд!
+      </h1>
+      <form name="Ориокс" action="#" method="get" style="text-align: center">
+        <input type="text" name="q" placeholder="Поиск">
+        <button type="submit">Вперёд</button>
+      </form>
+    <ul class="promote-zone">
+      {% for product in items %}
+        <li class="promote-link"> 
+        <a href="{{ product.get_absolute_url }}">
+          <img class="promote-img" src="{{ product.image.url }}" alt="{{ product.title }}">
+        </a>
+        </li>
+      {% endfor %}
+    </ul>
+{% endblock %}

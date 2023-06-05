@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1  class="heading"> 
+  <a class="back-button" href="{{request.META.HTTP_REFERER}}"> < </a> 
+  Вход в аккаунт
+</h1>
+<form name="Log in form" class="autoriz-form" action="#" method="post" style="text-align: center">
+  {% csrf_token %}
+    {% for f in form %}
+    <p class="input js-input-password"> {{ f }} </p>
+    {{f.errors}}
+  {% endfor %}
+  <a class="not-main" href="{% url 'register' %}">Регистрация</a>
+  <br>
+  <button type="submit">Войти</button>
+</form>
+<!-- <script src="/shop/static/shop/js/validate.js"></script> -->
+{% endblock %}

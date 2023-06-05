@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="heading">
+      <a class="back-button" href="{{request.META.HTTP_REFERER}}"><</a>
+      <a>{{post.title}}</a>
+    </h1>
+    <div class="profile-info" id="container">
+    <a> <img src="{{post.image.url}}" alt="" class="item-img"> </a>
+    <div class="about-item">
+      <h5> About item</h5>
+      <p>{{post.discribtion}}</p>
+      <h2>{{post.price}}$</h2>
+      <h5> 
+        <div class="ui-grid">
+          <div> items left:  </div>
+          <div class="left-items{{ post.id }}"> {{ post.count }} </div> 
+        </div>
+      </h5>
+    </div>
+    {% if user.is_authenticated %}
+      <form class="add-card-form" method="POST" action="{% url 'add_to_card' post.id %}" id="{{post.id}}">
+        {% csrf_token %}
+        <input type="hidden" value="{{post.id}}">
+          <button onclick=Change(this) type="submit" class="card-btn{{product.id}}"> Add to card </button>
+      </form>
+    {% else %}
+      <a class="nav-button" href="{% url 'login' %}"> Add to card </a>
+    {% endif %}
+    </div>
+{% endblock %}
